@@ -1,0 +1,33 @@
+{
+  "dependencies": {
+    "inquirer": "^8.2.4"
+  },
+  "name": "team-profile-generator",
+  "version": "1.0.0",
+  "description": "A command line program which takes user information and generates an html webpage full of that user's development team, as input.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DRCallaghan/team-profile-generator.git"
+  },
+  "keywords": [
+    "team",
+    "profile",
+    "generator",
+    "creator",
+    "card"
+  ],
+  "author": "Dennis Russell Callaghan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DRCallaghan/team-profile-generator/issues"
+  },
+  "homepage": "https://github.com/DRCallaghan/team-profile-generator#readme"
+}
