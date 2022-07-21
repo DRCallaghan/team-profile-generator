@@ -12,7 +12,9 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "npm test"
+    "start": "node index",
+    "watch": "nodemon index",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
