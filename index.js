@@ -1,11 +1,12 @@
 // Including packages needed for this application
 const inquirer = require('inquirer');
-const fs = require('fs');
-const Manager = require('./lib/manager');
-const Engineer = require('./lib/engineer');
-const Intern = require('./lib/intern');
-const { startHtml, endHtml } = require('./src/writeHtml');
-const { managerQuestions, questions } = require('./src/questions');
+const Manager = require('./lib/manager.js');
+const Engineer = require('./lib/engineer.js');
+const Intern = require('./lib/intern.js');
+const startHtml = require('./src/startHtml.js');
+const endHtml = require('./src/endHtml.js');
+const questions = require('./src/questions.js');
+const managerQuestions = require('./src/managerQuestions.js');
 
 let getMembers = () => {
     inquirer
@@ -35,13 +36,13 @@ let init = () => {
     inquirer
         .prompt(managerQuestions)
         .then((managerResponse) => {
+            getMembers();
             // declaring a new Manager based on the user input
             let newManager = new Manager(managerResponse.managerName, managerResponse.managerId, managerResponse.managerEmail, managerResponse.managerOffice);
             // generating a new html card for that Manager and starting index.html
-            startHtml();
             newManager.generateCard();
-            getMembers();
-        });
+            startHtml();
+        })
 }
 
 init();

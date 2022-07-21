@@ -3,7 +3,7 @@ const fs = require('fs');
 
 // starter function for a basic html header
 const startHtml = () => {
-    fs.appendFile('../dist/index.html',
+    fs.appendFile('./dist/index.html',
         `<!DOCTYPE html>
 <html>
 
@@ -38,26 +38,9 @@ const startHtml = () => {
         (err) => {
             if (err)
                 throw err;
-            console.log(`Successfully started index.html!\n`);
-        });
-}
-
-const endHtml = () => {
-    fs.appendFile('../dist/index.html',
-        `
-                </div>
-            </div>
-        </main>
-    </body>
-
-    </html>`,
-        (err) => {
-            if (err)
-                throw err;
-            console.log(`Successfully finished index.html!\n`);
+            console.log(`\n----------------------------\nSuccessfully started index.html!`);
         });
 }
 
 // exporting the functions
-exports.startHtml = startHtml;
-exports.endHtml = endHtml;
+module.exports = startHtml;
