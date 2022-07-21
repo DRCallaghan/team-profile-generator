@@ -218,8 +218,9 @@ const questions = [
     }
 ]
 
+// generating html based off the manager data from user responses and appending it to index.html, as well as starting the html file
 let generateManagerCard = (manager) => {
-    fs.appendFile('index.html',
+    fs.appendFile('./dist/index.html',
         `<!DOCTYPE html>
 <html>
 
@@ -270,8 +271,9 @@ let generateManagerCard = (manager) => {
         });
 }
 
+// generating html based off the engineer data from user responses and appending it to index.html
 let generateEngineerCard = (engineer) => {
-    fs.appendFile('index.html',
+    fs.appendFile('./dist/index.html',
         `                  <div class="engineer card bg-secondary" style="width: 18rem; margin: 20px;">
                     <div class="card-body">
                         <h2 id="engineer-name">${engineer.getName()} <span class="badge badge-primary">Engineer</span></h2>
@@ -291,8 +293,9 @@ let generateEngineerCard = (engineer) => {
         });
 }
 
+// generating html based off the intern data from user responses and appending it to index.html
 let generateInternCard = (intern) => {
-    fs.appendFile('index.html',
+    fs.appendFile('./dist/index.html',
         `                  <div class="intern card bg-secondary" style="width: 18rem; margin: 20px;">
                     <div class="card-body">
                         <h2 id="intern-name">${intern.getName()} <span class="badge badge-primary">Intern</span></h2>
@@ -312,42 +315,40 @@ let generateInternCard = (intern) => {
         });
 }
 
-let proceed = true;
-
+// running all questions after the initial manager prompt
 let getMembers = () => {
     inquirer
         .prompt(questions)
         .then((response) => {
-            if (proceed) {
-                if (response.proceed == 'Add an Engineer') {
-                    // declaring a new Engineer based on the user input
-                    let newEngineer = new Engineer(response.engineerName, response.engineerId, response.engineerEmail, response.engineerGithub);
-                    // generating a new html card for that Engineer
-                    generateEngineerCard(newEngineer);
-                    // running the prompt again
-                    getMembers();
-                } else if (response.proceed == 'Add an Intern') {
-                    // declaring a new Intern based on the user input
-                    let newIntern = new Intern(response.internName, response.internId, response.internEmail, response.internSchool);
-                    // generating a new html card for that Intern
-                    generateInternCard(newIntern);
-                    // running the prompt again
-                    getMembers();
-                }
-            }
-            fs.appendFile('index.html',
-                `
+            if (response.proceed == 'Add an Engineer') {
+                // declaring a new Engineer based on the user input
+                let newEngineer = new Engineer(response.engineerName, response.engineerId, response.engineerEmail, response.engineerGithub);
+                // generating a new html card for that Engineer
+                generateEngineerCard(newEngineer);
+                // running the prompt again
+                getMembers();
+            } else if (response.proceed == 'Add an Intern') {
+                // declaring a new Intern based on the user input
+                let newIntern = new Intern(response.internName, response.internId, response.internEmail, response.internSchool);
+                // generating a new html card for that Intern
+                generateInternCard(newIntern);
+                // running the prompt again
+                getMembers();
+            } else {
+                fs.appendFile('./dist/index.html',
+                    `
             </div>
         </div>
     </main>
 </body>
 
 </html>`,
-                (err) => {
-                    if (err)
-                        throw err;
-                    console.log(`Successfully finished index.html!`);
-                });
+                    (err) => {
+                        if (err)
+                            throw err;
+                        console.log(`Successfully finished index.html!`);
+                    });
+            }
         });
 }
 
